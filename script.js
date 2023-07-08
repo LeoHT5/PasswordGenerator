@@ -1,5 +1,5 @@
 
-let textCase = '';
+let randomTextGeneral = '';
 let lowercaseLetters = [];
 let uppercaseLetters = [];
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -8,6 +8,27 @@ let characters = '!\/\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 //Obteniendo referencias
 const textoElement = document.getElementById('textPassword');
 const rangeInput = document.getElementById('customRange2');
+const uppercaseCheckbox = document.getElementById('flexSwitchUppercase');
+const lowercaseCheckbox = document.getElementById('flexSwitchLowercase');
+const numberCheckbox = document.getElementById('flexSwitchNumbers');
+const symbolCheckbox = document.getElementById('flexSwitchSymbols');
+const selectAll = document.getElementById('flexSwitchAll');
+const rangeTooltip = document.getElementById('rangeTooltip');
+const lengthInput = document.getElementById('lp-pg-password-length');
+
+uppercaseCheckbox.addEventListener('change', generatePassword);
+uppercaseCheckbox.addEventListener('change', handleUncheckedOptions);
+
+lowercaseCheckbox.addEventListener('change', generatePassword);
+lowercaseCheckbox.addEventListener('change', handleUncheckedOptions);
+
+numberCheckbox.addEventListener('change', generatePassword);
+numberCheckbox.addEventListener('change', handleUncheckedOptions);
+
+symbolCheckbox.addEventListener('change', generatePassword);
+symbolCheckbox.addEventListener('change', handleUncheckedOptions);
+
+selectAll.addEventListener('change', selectionOption);
 
 function getRandomLowercaseLetter() {
   const randomNumber = Math.floor((Math.random() * 26).toFixed(15)); // Genera un número aleatorio entre 0 y 25
@@ -43,10 +64,11 @@ function text(x) {
   textoElement.value = x;
 }
 
-let randomTextGeneral = '';
+const length = rangeInput.value;
+
 function addGeneral() {
   randomTextGeneral = '';
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < length; i++) {
     const randomType = Math.floor(Math.random() * 4);
     switch (randomType) {
       case 0:
@@ -68,10 +90,6 @@ function addGeneral() {
 
 function generatePassword() {
   randomTextGeneral = '';
-  let uppercaseCheckbox = document.getElementById('flexSwitchUppercase');
-  let lowercaseCheckbox = document.getElementById('flexSwitchLowercase');
-  let numberCheckbox = document.getElementById('flexSwitchNumbers');
-  let symbolCheckbox = document.getElementById('flexSwitchSymbols');
 
   if (uppercaseCheckbox.checked && lowercaseCheckbox.checked && numberCheckbox.checked && symbolCheckbox.checked) {
     for (let i = 0; i < 30; i++) {
@@ -94,7 +112,7 @@ function generatePassword() {
         randomTextGeneral += getRandomUppercaseLetter();
       } else if (random < 0.5) {
         randomTextGeneral += getRandomLowercaseLetter();
-      } else{
+      } else {
         randomTextGeneral += getRandomNumbers();
       }
     }
@@ -106,7 +124,19 @@ function generatePassword() {
         randomTextGeneral += getRandomUppercaseLetter();
       } else if (random < 0.5) {
         randomTextGeneral += getRandomLowercaseLetter();
-      } else{
+      } else {
+        randomTextGeneral += getRandomCharacters();
+      }
+    }
+  } else if (uppercaseCheckbox.checked && numberCheckbox.checked && symbolCheckbox.checked) {
+    // Generar combinación de mayúsculas, números y symbolos
+    for (let i = 0; i < 30; i++) {
+      let random = Math.random();
+      if (random < 0.25) {
+        randomTextGeneral += getRandomUppercaseLetter();
+      } else if (random < 0.5) {
+        randomTextGeneral += getRandomNumbers();
+      } else {
         randomTextGeneral += getRandomCharacters();
       }
     }
@@ -118,7 +148,7 @@ function generatePassword() {
         randomTextGeneral += getRandomLowercaseLetter();
       } else if (random < 0.5) {
         randomTextGeneral += getRandomNumbers();
-      } else{
+      } else {
         randomTextGeneral += getRandomCharacters();
       }
     }
@@ -130,7 +160,7 @@ function generatePassword() {
         randomTextGeneral += getRandomUppercaseLetter();
       } else {
         randomTextGeneral += getRandomLowercaseLetter();
-      } 
+      }
     }
   } else if (uppercaseCheckbox.checked && numberCheckbox.checked) {
     // Generar combinación de mayúsculas y números
@@ -140,7 +170,7 @@ function generatePassword() {
         randomTextGeneral += getRandomUppercaseLetter();
       } else {
         randomTextGeneral += getRandomNumbers();
-      } 
+      }
     }
   } else if (uppercaseCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de mayúsculas y símbolos
@@ -150,7 +180,7 @@ function generatePassword() {
         randomTextGeneral += getRandomUppercaseLetter();
       } else {
         randomTextGeneral += getRandomCharacters();
-      } 
+      }
     }
   } else if (lowercaseCheckbox.checked && numberCheckbox.checked) {
     // Generar combinación de minúsculas y números
@@ -160,7 +190,7 @@ function generatePassword() {
         randomTextGeneral += getRandomLowercaseLetter();
       } else {
         randomTextGeneral += getRandomNumbers();
-      } 
+      }
     }
   } else if (lowercaseCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de minúsculas y símbolos
@@ -170,7 +200,7 @@ function generatePassword() {
         randomTextGeneral += getRandomLowercaseLetter();
       } else {
         randomTextGeneral += getRandomCharacters();
-      } 
+      }
     }
   } else if (numberCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de números y símbolos
@@ -180,13 +210,13 @@ function generatePassword() {
         randomTextGeneral += getRandomNumbers();
       } else {
         randomTextGeneral += getRandomCharacters();
-      } 
+      }
     }
   } else if (uppercaseCheckbox.checked) {
     // Generar solo mayúsculas
     for (let i = 0; i < 30; i++) {
-        randomTextGeneral += getRandomUppercaseLetter();
-      }
+      randomTextGeneral += getRandomUppercaseLetter();
+    }
   } else if (lowercaseCheckbox.checked) {
     // Generar solo minúsculas
     for (let i = 0; i < 30; i++) {
@@ -209,10 +239,77 @@ function generatePassword() {
   text(randomTextGeneral);
 }
 
-addGeneral();
+function selectionOption() {
+  if (selectAll.checked) {
+    uppercaseCheckbox.checked = true;
+    uppercaseCheckbox.disabled = true;
+
+    lowercaseCheckbox.checked = true;
+    lowercaseCheckbox.disabled = true;
+
+    numberCheckbox.checked = true;
+    numberCheckbox.disabled = true;
+
+    symbolCheckbox.checked = true;
+    symbolCheckbox.disabled = true;
+  } else if (!selectAll.checked) {
+    uppercaseCheckbox.checked = true;
+    uppercaseCheckbox.disabled = false;
+
+    lowercaseCheckbox.checked = true;
+    lowercaseCheckbox.disabled = false;
+
+    numberCheckbox.checked = true;
+    numberCheckbox.disabled = false;
+
+    symbolCheckbox.checked = true;
+    symbolCheckbox.disabled = false;
+  } else {
+    uppercaseCheckbox.checked = false;
+    uppercaseCheckbox.disabled = false;
+
+    lowercaseCheckbox.checked = false;
+    lowercaseCheckbox.disabled = false;
+
+    numberCheckbox.checked = false;
+    numberCheckbox.disabled = false;
+
+    symbolCheckbox.checked = false;
+    symbolCheckbox.disabled = false;
+  }
+}
+
+function handleUncheckedOptions() {
+  if (!uppercaseCheckbox.checked && !lowercaseCheckbox.checked && !numberCheckbox.checked && !symbolCheckbox.checked) {
+    selectAll.checked = true;
+
+    uppercaseCheckbox.checked = true;
+    uppercaseCheckbox.disabled = true;
+
+    lowercaseCheckbox.checked = true;
+    lowercaseCheckbox.disabled = true;
+
+    numberCheckbox.checked = true;
+    numberCheckbox.disabled = true;
+
+    symbolCheckbox.checked = true;
+    symbolCheckbox.disabled = true;
+  }
+}
+
+rangeInput.addEventListener('input', function() {
+  const value = rangeInput.value;
+  rangeTooltip.textContent = value;
+  lengthInput.value = rangeInput.value;
+  rangeInput.value = lengthInput.value;
+});
+
 rangeInput.addEventListener('click', function () {
   generatePassword();
 });
 
-//Seleccionar el rango de la contraseña y agregar una opcion que se llame all caracters y siempre este seleccionado cuando desactivamos las demas opciones
-// y se desactive cuando activo alguna otra opcion
+document.addEventListener('DOMContentLoaded', function () {
+  selectAll.checked = true;
+  selectionOption();
+  addGeneral();
+});

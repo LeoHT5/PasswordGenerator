@@ -24,37 +24,42 @@
         </div>
         <div class="customize-password">
             <h2>Customize your password</h2>
-            <div class="input-range">
-                <input type="range" min="0" max="100" value="50" class="form-range custom-range" id="customRange2">
+            <div class="range-container">
+                <input type="range" min="3" max="50" value="25" class="form-range custom-range" id="customRange2">
+                <span class="range-tooltip" id="rangeTooltip"></span>
+            </div>
+            <div class="customize-range">
+                <h3>Range</h3>
+                <input value="25" name="length" class="lp-custom-range_number" step="1" id="lp-pg-password-length" type="number" min="3" max="50">
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchUppercase"
-                    onchange="generatePassword()">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchUppercase">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Uppercase</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchLowercase"
-                    onchange="generatePassword()">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchLowercase">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Lowercase</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchNumbers"
-                    onchange="generatePassword()">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchNumbers">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Numbers</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchSymbols"
-                    onchange="generatePassword()">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchSymbols">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Symbols</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchAll">
+                <label class=" form-check-label" for="flexSwitchCheckDefault">All Characters</label>
             </div>
         </div>
     </main>
 
     <script src="script.js"></script>
+    <script src="animated.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-    <script src="animated.js"></script>
 </body>
 
 </html>
