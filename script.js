@@ -13,8 +13,11 @@ const lowercaseCheckbox = document.getElementById('flexSwitchLowercase');
 const numberCheckbox = document.getElementById('flexSwitchNumbers');
 const symbolCheckbox = document.getElementById('flexSwitchSymbols');
 const selectAll = document.getElementById('flexSwitchAll');
-const rangeTooltip = document.getElementById('rangeTooltip');
 const lengthInput = document.getElementById('lp-pg-password-length');
+const passwordGenerator = document.getElementById("button-password-generator");
+const passwordCopy = document.getElementById("button-password-copy");
+
+let passwordLength = rangeInput.value;
 
 uppercaseCheckbox.addEventListener('change', generatePassword);
 uppercaseCheckbox.addEventListener('change', handleUncheckedOptions);
@@ -31,9 +34,9 @@ symbolCheckbox.addEventListener('change', handleUncheckedOptions);
 selectAll.addEventListener('change', selectionOption);
 
 function getRandomLowercaseLetter() {
-  const randomNumber = Math.floor((Math.random() * 26).toFixed(15)); // Genera un número aleatorio entre 0 y 25
-  const asciiCode = 97 + randomNumber; // Suma el número aleatorio al código ASCII de 'a'
-  const randomLetter = String.fromCharCode(asciiCode); // Obtiene la letra correspondiente al código ASCII
+  const randomNumber = Math.floor((Math.random() * 26).toFixed(15));
+  const asciiCode = 97 + randomNumber;
+  const randomLetter = String.fromCharCode(asciiCode);
 
   return randomLetter;
 }
@@ -64,11 +67,9 @@ function text(x) {
   textoElement.value = x;
 }
 
-const length = rangeInput.value;
-
 function addGeneral() {
   randomTextGeneral = '';
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < passwordLength; i++) {
     const randomType = Math.floor(Math.random() * 4);
     switch (randomType) {
       case 0:
@@ -92,7 +93,7 @@ function generatePassword() {
   randomTextGeneral = '';
 
   if (uppercaseCheckbox.checked && lowercaseCheckbox.checked && numberCheckbox.checked && symbolCheckbox.checked) {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.25) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -106,7 +107,7 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked && lowercaseCheckbox.checked && numberCheckbox.checked) {
     // Generar combinación de mayúsculas, minúsculas y números
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.25) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -118,7 +119,7 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked && lowercaseCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de mayúsculas, minúsculas y símbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.25) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -130,7 +131,7 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked && numberCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de mayúsculas, números y symbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.25) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -142,7 +143,7 @@ function generatePassword() {
     }
   } else if (lowercaseCheckbox.checked && numberCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de minúsculas, números y símbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.25) {
         randomTextGeneral += getRandomLowercaseLetter();
@@ -154,7 +155,7 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked && lowercaseCheckbox.checked) {
     // Generar combinación de mayúsculas y minúsculas
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.5) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -164,7 +165,7 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked && numberCheckbox.checked) {
     // Generar combinación de mayúsculas y números
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.5) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -174,7 +175,7 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de mayúsculas y símbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.5) {
         randomTextGeneral += getRandomUppercaseLetter();
@@ -184,7 +185,7 @@ function generatePassword() {
     }
   } else if (lowercaseCheckbox.checked && numberCheckbox.checked) {
     // Generar combinación de minúsculas y números
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.5) {
         randomTextGeneral += getRandomLowercaseLetter();
@@ -194,7 +195,7 @@ function generatePassword() {
     }
   } else if (lowercaseCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de minúsculas y símbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.5) {
         randomTextGeneral += getRandomLowercaseLetter();
@@ -204,7 +205,7 @@ function generatePassword() {
     }
   } else if (numberCheckbox.checked && symbolCheckbox.checked) {
     // Generar combinación de números y símbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       let random = Math.random();
       if (random < 0.5) {
         randomTextGeneral += getRandomNumbers();
@@ -214,22 +215,22 @@ function generatePassword() {
     }
   } else if (uppercaseCheckbox.checked) {
     // Generar solo mayúsculas
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       randomTextGeneral += getRandomUppercaseLetter();
     }
   } else if (lowercaseCheckbox.checked) {
     // Generar solo minúsculas
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       randomTextGeneral += getRandomLowercaseLetter();
     }
   } else if (numberCheckbox.checked) {
     // Generar solo números
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       randomTextGeneral += getRandomNumbers();
     }
   } else if (symbolCheckbox.checked) {
     // Generar solo símbolos
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       randomTextGeneral += getRandomCharacters();
     }
   } else {
@@ -297,19 +298,89 @@ function handleUncheckedOptions() {
   }
 }
 
-rangeInput.addEventListener('input', function() {
-  const value = rangeInput.value;
-  rangeTooltip.textContent = value;
-  lengthInput.value = rangeInput.value;
-  rangeInput.value = lengthInput.value;
+function limitLengthInputValue() {
+  let valueLength = parseInt(lengthInput.value);
+
+  if (valueLength > 50) {
+    valueLength = 50;
+  }
+
+  if (valueLength < 1) {
+    valueLength = 1;
+  }
+
+  lengthInput.value = valueLength;
+  rangeInput.value = valueLength;
+  passwordLength = valueLength;
+
+  const valueHover = rangeInput.value;
+  lengthInput.textContent = valueHover;
+  generatePassword();
+}
+
+function updateLength() {
+  const valueHover = rangeInput.value;
+  lengthInput.textContent = valueHover;
+
+  passwordLength = parseInt(valueHover);
+  lengthInput.value = passwordLength;
+}
+
+function copyPassword() {
+
+  let targetInput = document.querySelector(
+    document.getElementById("button-password-copy").getAttribute("data-clipboard-target")
+  );
+
+  // Seleccionar el texto dentro del input
+  targetInput.select();
+  targetInput.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+  // Copiar el texto seleccionado al portapapeles
+  document.execCommand("copy");
+
+  // Deseleccionar el texto
+  window.getSelection().removeAllRanges();
+}
+
+function initialize() {
+  const valueHover = rangeInput.value;
+  const valueLength = rangeInput.value;
+  lengthInput.textContent = valueHover;
+  lengthInput.value = valueLength;
+
+  selectAll.checked = true;
+  selectionOption();
+  addGeneral();
+}
+
+//Genera la contraseña con el rango del slider
+rangeInput.addEventListener('input', function () {
+  updateLength();
+});
+
+//Genera la contraseña con el rango del input text
+lengthInput.addEventListener('input', function () {
+  limitLengthInputValue();
+});
+
+lengthInput.addEventListener('blur', function () {
+  limitLengthInputValue();
 });
 
 rangeInput.addEventListener('click', function () {
   generatePassword();
 });
 
+passwordCopy.addEventListener('click', function () {
+  copyPassword();
+})
+
+passwordGenerator.addEventListener('click', function () {
+  generatePassword();
+  // document.getElementById("button-password-generator").blur();
+})
+
 document.addEventListener('DOMContentLoaded', function () {
-  selectAll.checked = true;
-  selectionOption();
-  addGeneral();
+  initialize();
 });

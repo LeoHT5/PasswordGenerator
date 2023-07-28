@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Password Generator</title>
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -17,40 +18,53 @@
         <source src="video/background-clip.mp4" type="video/mp4">
     </video>
 
-    <main class="container">
-        <h1>Password Generator</h1>
-        <div class="input-password">
-            <input type="text" id="textPassword" class="form-control customize-form-control">
-        </div>
-        <div class="customize-password">
-            <h2>Customize your password</h2>
-            <div class="range-container">
-                <input type="range" min="3" max="50" value="25" class="form-range custom-range" id="customRange2">
-                <span class="range-tooltip" id="rangeTooltip"></span>
+    <main class="main">
+        <div class="container">
+            <h1>Password Generator</h1>
+            <div class="input-password">
+                <input type="text" id="textPassword" class="form-control customize-form-control">
+                <div class="password-button">
+                    <button class="passworrd-copy" id="button-password-copy" data-clipboard-target="#textPassword">
+                        <span>Copy</span>
+                    </button>
+                    <button class="password-generator" id="button-password-generator">
+                        <span id="span-generate">Generate</span>
+                    </button>
+                </div>
             </div>
-            <div class="customize-range">
-                <h3>Range</h3>
-                <input value="25" name="length" class="lp-custom-range_number" step="1" id="lp-pg-password-length" type="number" min="3" max="50">
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchUppercase">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Uppercase</label>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchLowercase">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Lowercase</label>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchNumbers">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Numbers</label>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchSymbols">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Symbols</label>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchAll">
-                <label class=" form-check-label" for="flexSwitchCheckDefault">All Characters</label>
+            <div class="customize-password">
+                <h2>Customize your password</h2>
+                <div class="range-container">
+                    <div class="range-title">
+                        <h3>Range</h3>
+                        <input name="length" class="lp-custom-range_number" step="1" id="lp-pg-password-length"
+                            type="number" min="1" max="50">
+                    </div>
+                    <input type="range" min="1" max="50" step="1" value="25" class="form-range custom-range"
+                        id="customRange2">
+                </div>
+                <div class="checkbox-container">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchUppercase">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Uppercase</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchLowercase">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Lowercase</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchNumbers">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Numbers</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchSymbols">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Symbols</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchAll">
+                        <label class=" form-check-label" for="flexSwitchCheckDefault">All Characters</label>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
